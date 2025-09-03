@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI To-Do List v2</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-brain"></i> AI To-Do List</h1>
+            <p>Enter a task and let AI break it down for you.</p>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form action="/" method="POST" class="task-form">
+            <input type="text" name="content" id="content" placeholder="e.g., Plan a weekend trip to the mountains" required>
+            <button type="submit">Add Task <i class="fas fa-plus"></i></button>
+        </form>
+
+        <div class="task-list">
+            {% for data in tasks_with_subtasks %}
+                <div class="task-card {% if data.task['status'] == 'complete' %}task-complete{% endif %}">
+                    <div class="main-task">
+                        <h3>{{ data.task['content'] }}</h3>
+                        <div class="task-actions">
+                            {% if data.task['status'] == 'incomplete' %}
+                                <a href="/complete/{{ data.task['id'] }}" class="action-btn complete-btn" title="Mark as Complete"><i class="fas fa-check"></i></a>
+                            {% endif %}
+                            <a href="/delete/{{ data.task['id'] }}" class="action-btn delete-btn" title="Delete Task"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                    
+                    <ul class="subtask-list">
+                        {% for subtask in data.subtasks %}
+                            <li>{{ subtask['content'] }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <i class="fas fa-clipboard-list"></i>
+                    <p>Your task list is empty!</p>
+                    <span>Add a task above to get started.</span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

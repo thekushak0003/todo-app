@@ -1,0 +1,178 @@
+/* static/style.css */
+
+/* --- General Setup & Variables --- */
+:root {
+    --primary-color: #4a90e2;
+    --success-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --info-color: #f39c12;
+    --light-bg: #f8f9fa;
+    --dark-text: #343a40;
+    --light-text: #6c757d;
+    --border-color: #dee2e6;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+    margin: 0;
+    padding: 2rem;
+}
+
+/* --- Main Layout --- */
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+header h1 .fa-brain {
+    margin-right: 10px;
+}
+
+header p {
+    color: var(--light-text);
+    font-size: 1.1rem;
+}
+
+/* --- Flash Messages --- */
+.flash-messages {
+    margin-bottom: 1.5rem;
+}
+.alert {
+    padding: 1rem;
+    border-radius: 8px;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+.alert-success { background-color: var(--success-color); }
+.alert-error { background-color: var(--danger-color); }
+.alert-info { background-color: var(--info-color); }
+
+/* --- Task Input Form --- */
+.task-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 2rem;
+}
+
+.task-form input {
+    flex-grow: 1;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.task-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.task-form button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.task-form button:hover {
+    background-color: #357abd;
+}
+
+/* --- Task List & Cards --- */
+.task-card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.main-task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.main-task h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.task-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.complete-btn { color: var(--success-color); }
+.complete-btn:hover { background-color: #eafaf1; }
+
+.delete-btn { color: var(--danger-color); }
+.delete-btn:hover { background-color: #fbecec; }
+
+/* Sub-tasks */
+.subtask-list {
+    list-style-type: '✓ ';
+    padding-left: 20px;
+    margin: 0;
+    color: var(--light-text);
+}
+
+/* --- Completed Task State --- */
+.task-complete {
+    background-color: #fdfdfd;
+    opacity: 0.7;
+}
+
+.task-complete .main-task h3 {
+    text-decoration: line-through;
+    color: var(--light-text);
+}
+
+/* --- Empty State --- */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--light-text);
+}
+
+.empty-state .fas {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: var(--border-color);
+}
